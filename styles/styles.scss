@@ -1,41 +1,92 @@
+$sidebarWidth: 26rem;
+$ease: cubic-bezier(0.44, 0.21, 0, 1);
+
 body {
   overflow-x: hidden;
 }
 
+a {
+}
+
+svg {
+  cursor: pointer;
+  color: inherit;
+  transition: 100ms ease;
+  transform: scale(0.8);
+}
+
+.github {
+  transform: translateY(-10%) scale(0.7);
+  color: inherit;
+}
+
+.icon-tabler-x {
+  transform: translateY(10%);
+  transition: 600ms $ease;
+
+  &:hover {
+    transform: rotate(180deg);
+    color: red;
+  }
+}
+
 .app {
   display: flex;
+  padding-left: 0;
+  transition: 400ms $ease;
 
-  .wrapper {
+  .top-items {
+    position: fixed;
+    display: flex;
+    top: 2rem;
+    left: 2rem;
+    z-index: 998;
+  }
+
+  .sidebar {
     padding: 1rem 2rem;
-    width: fit-content;
     height: 100vh;
-    flex-shrink: 0;
+    background-color: white;
+    transition: 400ms $ease;
+    min-width: $sidebarWidth;
+    z-index: 999;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 
   .board {
-    flex-grow: 10000;
     display: grid;
+    width: 100%;
     place-items: center;
-    padding: 3rem;
+    padding: 2rem;
     overflow: auto;
+    height: 100vh;
 
     .worm {
       filter: drop-shadow(0 0 30px hsla(0, 100%, 0%, 0.33));
       white-space: nowrap;
-      width: fit-content;
       display: flex;
+      justify-content: center;
+      transition: 400ms $ease;
 
       .worm__block {
         animation: worm 400ms linear alternate infinite, fade 500ms linear;
         opacity: 0;
         animation-fill-mode: forwards;
-        flex-shrink: 0;
         position: relative;
 
         .eyes,
         .mouth {
           background-color: black;
-          opacity: 0.6;
+          opacity: 0.5;
         }
       }
     }
@@ -46,11 +97,6 @@ input {
   display: block;
   min-width: 16rem;
   width: 100%;
-}
-
-svg {
-  transform: scale(0.8) translateY(5px);
-  margin-left: 5px;
 }
 
 @keyframes worm {
